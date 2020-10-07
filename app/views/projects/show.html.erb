@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<br>
+
+<%= link_to 'Edit', edit_project_path(@project) %>
+
+<br><br>
+<h1>Tickets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Submitter</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Created</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.title %></td>
+        <td><%= ticket.user.username %></td>
+        <td><%= format_status(ticket.status) %></td>
+        <td><%= ticket.priority.capitalize %></td>
+        <td><%= time_ago_in_words(ticket.created_at) %> ago</td>
+        <td><%= link_to 'Show', [@project, ticket] %></td>
+        <td><%= link_to 'Edit', edit_project_ticket_path(@project, ticket) %></td>
+        <td><%= link_to 'Destroy', [@project, ticket], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticket', new_project_ticket_path(@project) %>
+
+<br>
+
+<%= link_to 'Back', projects_path %>
