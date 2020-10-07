@@ -1,9 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<h1><%= @project.name %></h1>
 
 <p>
   <strong>Description:</strong>
@@ -12,10 +7,10 @@
 
 <br>
 
-<%= link_to 'Edit', edit_project_path(@project) %>
+<%= link_to 'Edit Project', edit_project_path(@project) %>
 
 <br><br>
-<h1>Tickets</h1>
+<h1>Tickets (<%= @project.tickets.size %>)</h1>
 
 <table>
   <thead>
@@ -51,4 +46,4 @@
 
 <br>
 
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Projects', projects_path %>

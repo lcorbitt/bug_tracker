@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :tickets
+    resources :tickets do
+      resources :comments
+    end
   end
 end

@@ -1,0 +1,17 @@
+<p>
+  <strong>User:</strong>
+  <%= @comment.user.username %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @comment.message %>
+</p>
+
+<p>
+  <strong>Commented on:</strong>
+  <%= @comment.commented_on %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

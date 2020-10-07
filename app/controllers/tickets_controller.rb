@@ -1,9 +1,14 @@
 class TicketsController < ApplicationController
-  before_action :set_project, only: [:new, :create, :edit, :update]
-  before_action :set_ticket, only: [:edit, :update, :destroy]
+  before_action :set_project, only: [:new, :create, :edit, :update, :show, :destroy]
+  before_action :set_ticket, only: [:edit, :update, :destroy, :show]
 
   def new
     @ticket = Ticket.new
+  end
+
+  def show
+    @comment = Comment.new
+    @comments = Comment.for(commented_on_id: @ticket.id)
   end
 
   def edit
@@ -38,7 +43,7 @@ class TicketsController < ApplicationController
   def destroy
     @ticket.destroy
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
+      format.html { redirect_to @project, notice: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

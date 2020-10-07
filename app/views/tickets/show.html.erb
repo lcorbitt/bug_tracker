@@ -1,0 +1,64 @@
+<p>
+  <strong>Project Name:</strong>
+  <%= link_to @project.name, project_path(@project) %>
+</p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @ticket.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ticket.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= format_status(@ticket.status) %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @ticket.priority.capitalize %>
+</p>
+
+<br>
+
+<%= link_to 'Edit Ticket', edit_project_ticket_path(@project, @ticket) %>
+
+<br><br>
+<h1>Comments (<%= @ticket.comments.size %>)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Submitter</th>
+      <th>Message</th>
+      <th>Created</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.username %></td>
+        <td><%= comment.message %></td>
+        <td><%= time_ago_in_words(comment.created_at) %> ago</td>
+        <td><%= link_to 'Edit', edit_project_ticket_comment_path(@project, @ticket, comment)%></td>
+        <td><%= link_to 'Destroy', project_ticket_comment_path(@project, @ticket, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+<%= render 'comments/form' %>
+
+<br>
+
+<%= link_to 'Back', project_path(@project) %>
