@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= form_for([:admin, user], url: "/admin/users/#{user.id}/toggle_role", method: :post) do |form| %>
+            <% if user.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                <ul>
+                  <% user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <p> <%= radio_button_tag :role, "admin", user.admin? %> Admin </p>
+            <p> <%= radio_button_tag  :role, "employee", user.employee? %> Employee </p>
+
+            <div class="actions">
+              <%= form.submit %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

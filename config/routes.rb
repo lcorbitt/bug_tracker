@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :users, only: [:index, :show, :destroy, :update]
+    post 'users/:id/toggle_role' => 'users#toggle_role'
+  end
+
   resources :projects do
     resources :tickets do
       resources :comments
