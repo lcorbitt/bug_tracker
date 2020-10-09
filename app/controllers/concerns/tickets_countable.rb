@@ -1,6 +1,25 @@
 module TicketsCountable
   extend ActiveSupport::Concern
 
+  def tickets_by_priority_totals
+    @tickets_by_priority_totals = [
+      none_priority_tickets.size,
+      low_priority_tickets.size,
+      medium_priority_tickets.size,
+      high_priority_tickets.size
+    ]
+  end
+
+  def tickets_by_status_totals
+    @tickets_by_status_totals = [
+      new_tickets.size,
+      open_tickets.size,
+      in_progress_tickets.size,
+      resolved_tickets.size,
+      more_info_needed_tickets.size
+    ]
+  end
+
   def total_tickets
     @total_tickets = current_user.tickets.size
   end

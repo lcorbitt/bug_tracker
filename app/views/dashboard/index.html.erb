@@ -1,45 +1,54 @@
-<h1>Dashboard</h1>
+<h1 class="mt-4">Dashboard</h1>
 
-<p>Tickets by Priority</p>
-<table>
-  <thead>
-    <tr>
-      <th>None</th>
-      <th>Low</th>
-      <th>Medium</th>
-      <th>High</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= @tickets_by_priority[:none] %></td>
-      <td><%= @tickets_by_priority[:low] %></td>
-      <td><%= @tickets_by_priority[:medium] %></td>
-      <td><%= @tickets_by_priority[:high] %></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Tickets by Status</p>
-<table>
-  <thead>
-    <tr>
-      <th>New</th>
-      <th>Open</th>
-      <th>In Progress</th>
-      <th>Resolved</th>
-      <th>More Info Needed</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= @tickets_by_status[:new] %></td>
-      <td><%= @tickets_by_status[:open] %></td>
-      <td><%= @tickets_by_status[:in_progress] %></td>
-      <td><%= @tickets_by_status[:resolved] %></td>
-      <td><%= @tickets_by_status[:more_info_needed] %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <!--Tickets by Priority Graph-->
+        <canvas
+          id="barChart"
+          data-controller="graph"
+          data-totals=<%= @tickets_by_priority_totals.to_json %>
+        >
+        </canvas>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Tickets by Priority</small>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <!--Tickets by Status Graph-->
+      <canvas
+        id="doughnutChart"
+        data-controller="graph"
+        data-totals=<%= @tickets_by_status_totals.to_json %>
+      >
+      </canvas>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Tickets by Status</small>
+    </div>
+  </div>
+  <!-- TODO: Tickets by Type-->
+  <%# <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div> %>
+  <!-- TODO: Tickets by Assignee-->
+  <%# <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div> %>
+</div>
