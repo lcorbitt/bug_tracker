@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def is_admin?
-    if current_user.role.to_sym == User::EMPLOYEE
+    if current_user.employee?
       redirect_to dashboard_index_path, alert: "You are not authorized to view that page."
     end
   end
