@@ -1,4 +1,7 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :toggle_role]
+  before_action :is_admin?, only: [:index, :toggle_role]
+
   def index
     @users = User.all.sort
   end
@@ -14,6 +17,14 @@ class Admin::UsersController < ApplicationController
         user.update_attribute(:role, :employee)
         format.html { redirect_to admin_users_path, notice: "🙊 #{user.username} is no longer an Admin..." }
       end
+    end
+  end
+
+  private
+
+  def is_admin?
+    if current_user.role.to_sym == User::EMPLOYEE
+      redirect_to dashboard_index_path, alert: "You are not authorized to view that page."
     end
   end
 end
