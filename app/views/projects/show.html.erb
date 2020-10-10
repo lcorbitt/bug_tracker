@@ -1,7 +1,6 @@
 <h1><%= @project.name %></h1>
 
 <p>
-  <strong>Description:</strong>
   <%= @project.description %>
 </p>
 
@@ -10,9 +9,9 @@
 <%= link_to 'Edit Project', edit_project_path(@project) %>
 
 <br><br>
-<h1>Tickets (<%= @project.tickets.size %>)</h1>
+<h3>Tickets (<%= @project.tickets.size %>)</h3>
 
-<table>
+<table class="table table-hover table-sm">
   <thead>
     <tr>
       <th>Title</th>
@@ -26,7 +25,7 @@
 
   <tbody>
     <% @tickets.each do |ticket| %>
-      <tr>
+      <tr class=<%= row_color(ticket.priority) unless ticket.status == "resolved"%>>
         <td><%= ticket.title %></td>
         <td><%= ticket.user.username %></td>
         <td><%= format_status(ticket.status) %></td>

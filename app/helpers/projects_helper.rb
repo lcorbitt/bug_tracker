@@ -6,4 +6,16 @@ module ProjectsHelper
       return status.titleize
     end
   end
+
+  def row_color(ticket_priority)
+    if ticket_priority == "low"
+      "table-success"
+    elsif ticket_priority == "medium"
+      "table-warning"
+    elsif ticket_priority == "high"
+      "table-danger"
+    else
+      "table-light"
+    end
+  end
 end
