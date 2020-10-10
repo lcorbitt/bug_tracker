@@ -35,4 +35,11 @@ class Ticket < ApplicationRecord
   end
 
   enum priority: ENUM_PRIORITY_MAPPINGS, _suffix: true
+
+  def self.for(project_id:)
+    self
+      .includes(:user)
+      .where(project_id: project_id)
+      .order(created_at: :desc)
+  end
 end
