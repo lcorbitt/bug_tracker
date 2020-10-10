@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @tickets = @project.tickets.includes(:user).order(created_at: :desc)
+    @tickets = Ticket.includes(:assignees).for(project_id: @project.id)
   end
 
   def new
