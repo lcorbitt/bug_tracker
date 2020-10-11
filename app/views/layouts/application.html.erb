@@ -13,20 +13,38 @@
   </head>
 
   <body>
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
-
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <%= render "layouts/sidebar" %>
 
       <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-          <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-          <% if user_signed_in? %>
-            <p>Welcome, <%= current_user.username %> (<%= current_user.role.capitalize %>)</p>
-          <% end %>
-          <!-- Could be a cool dropdown for more actions -->
+        <p id="notice"><%= notice %></p>
+        <p id="alert"><%= alert %></p>
+
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary rounded">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <button class="btn btn-primary btn-sm" id="menu-toggle">Toggle Menu</button>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item active">
+                <div class="nav-link">Welcome, <%= current_user.username %> (<%= current_user.role.capitalize %>)</a>
+              </li>
+            <% end %>
+
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link">Notifications <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <%= link_to "User Profile", '#', class: "nav-link" %>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Could be a cool dropdown for more actions -->
+        <%# <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom"> %>
           <%# <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button> %>
@@ -52,7 +70,7 @@
               </li>
             </ul>
           </div> %>
-        </nav>
+        <%# </nav> %>
 
         <div class="container-fluid">
           <%= yield %>
