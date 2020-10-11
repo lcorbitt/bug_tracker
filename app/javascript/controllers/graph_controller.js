@@ -4,15 +4,17 @@ export default class extends Controller {
   static targets = [ "barChart", "doughnutChart" ]
 
   connect() {
-    this.chartBarGraph()
+    this.graphTicketsByPriority()
+    this.graphTicketsByStatus()
+    this.graphTicketsByAssignee()
     this.chartDoughnutGraph()
   }
 
-  chartBarGraph() {
-    const canvas = document.getElementById("barChart")
+  graphTicketsByPriority() {
+    const canvas = document.getElementById("ticketsByPriorityChart")
     const ticketTotals = JSON.parse(canvas.dataset.totals)
     const ctx = canvas.getContext('2d');
-    const myBarGraph = new Chart(ctx, {
+    const myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: [
@@ -55,8 +57,8 @@ export default class extends Controller {
     });
   }
 
-  chartDoughnutGraph() {
-    const canvas = document.getElementById("doughnutChart")
+  graphTicketsByStatus() {
+    const canvas = document.getElementById("ticketsByStatusChart")
     const ticketTotals = JSON.parse(canvas.dataset.totals)
     const ctxD = canvas.getContext('2d');
     const myDoughnutGraph = new Chart(ctxD, {
