@@ -15,7 +15,11 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = @project.tickets.new(ticket_params)
+    submit_ticket = Tickets::SubmitTicket.new(
+      user: current_user,
+      project: @project,
+      params: ticket_params
+    )
 
     respond_to do |format|
       if @ticket.save
@@ -25,6 +29,10 @@ class TicketsController < ApplicationController
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
+    if submit_ticket.save
+      redirect_to @project, notice: 'You created a ticket for this project!'
+    else
+      render plain: submit_ticket.errors, status: :bad_request
     end
   end
 
@@ -49,15 +57,16 @@ class TicketsController < ApplicationController
   end
 
   private
+
+    def ticket_params
+      params.require(:ticket).permit(:user_id, :title, :status, :description, :priority, :assignees)
+    end
+
     def set_ticket
       @ticket = Ticket.find(params[:id])
     end
 
     def set_project
       @project = Project.find(params[:project_id])
-    end
-
-    def ticket_params
-      params.require(:ticket).permit(:title, :status, :description, :priority).merge(user_id: current_user.id)
     end
 end

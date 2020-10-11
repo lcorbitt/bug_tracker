@@ -23,6 +23,11 @@
   <%= @ticket.priority.capitalize %>
 </p>
 
+<p>
+  <strong>Assignee:</strong>
+  <%= @ticket.assignees.map(&:username).first %>
+</p>
+
 <br>
 
 <%= link_to 'Edit Ticket', edit_project_ticket_path(@project, @ticket) %>

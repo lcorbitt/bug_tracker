@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :projects
   has_many :tickets
+  has_many :ticket_assignees, dependent: :destroy, foreign_key: :user_id
   has_many :comments, dependent: :destroy
 
   validates :email, presence: true

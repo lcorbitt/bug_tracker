@@ -44,38 +44,38 @@ module TicketsCountable
   end
 
   def new_tickets
-    current_user.tickets.where(status: Ticket::NEW)
+    Ticket.where(status: Ticket::NEW)
   end
 
   def open_tickets
-    current_user.tickets.where(status: Ticket::OPEN)
+    Ticket.where(status: Ticket::OPEN)
   end
 
   def in_progress_tickets
-    current_user.tickets.where(status: Ticket::IN_PROGRESS)
+    Ticket.where(status: Ticket::IN_PROGRESS)
   end
 
   def resolved_tickets
-    current_user.tickets.where(status: Ticket::RESOLVED)
+    Ticket.where(status: Ticket::RESOLVED)
   end
 
   def more_info_needed_tickets
-    current_user.tickets.where(status: Ticket::MORE_INFO_NEEDED)
+    Ticket.where(status: Ticket::MORE_INFO_NEEDED)
   end
 
   def none_priority_tickets
-    current_user.tickets.where(priority: Ticket::NONE)
+    Ticket.where(priority: Ticket::NONE)
   end
 
   def low_priority_tickets
-    current_user.tickets.where(priority: Ticket::LOW)
+    Ticket.where(priority: Ticket::LOW)
   end
 
   def medium_priority_tickets
-    current_user.tickets.where(priority: Ticket::MEDIUM)
+    Ticket.where(priority: Ticket::MEDIUM)
   end
 
   def high_priority_tickets
-    current_user.tickets.where(priority: Ticket::HIGH)
+    Ticket.where(priority: Ticket::HIGH)
   end
 end

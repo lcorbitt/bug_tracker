@@ -3,6 +3,8 @@ class Ticket < ApplicationRecord
   belongs_to :project
 
   has_many :comments, as: :commented_on, dependent: :destroy
+  has_many :ticket_assignees, dependent: :destroy
+  has_many :assignees, through: :ticket_assignees, source: :user
 
   # Creates the ActiveRecord::Enum mappings between the attribute values and
   # their associated database integers. Also creates a constant for each value.

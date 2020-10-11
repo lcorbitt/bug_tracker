@@ -19,6 +19,7 @@
       <th>Status</th>
       <th>Priority</th>
       <th>Created</th>
+      <th>Assignee</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,6 +32,7 @@
         <td><%= format_status(ticket.status) %></td>
         <td><%= ticket.priority.capitalize %></td>
         <td><%= time_ago_in_words(ticket.created_at) %> ago</td>
+        <td><%= ticket.assignees.map(&:username).first %></td>
         <td><%= link_to 'Show', [@project, ticket] %></td>
         <td><%= link_to 'Edit', edit_project_ticket_path(@project, ticket) %></td>
         <td><%= link_to 'Destroy', [@project, ticket], method: :delete, data: { confirm: 'Are you sure?' } %></td>
