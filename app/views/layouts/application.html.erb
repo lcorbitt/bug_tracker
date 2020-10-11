@@ -18,8 +18,10 @@
       <%= render "layouts/sidebar" %>
 
       <div id="page-content-wrapper">
-        <p id="notice"><%= notice %></p>
-        <p id="alert"><%= alert %></p>
+        <% if notice.present? || alert.present? %>
+          <p id="notice"><%= notice %></p>
+          <p id="alert"><%= alert %></p>
+        <% end %>
 
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary rounded">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
