@@ -18,4 +18,16 @@ module ProjectsHelper
       "table-light"
     end
   end
+
+  def priority_badge_color(priority)
+    if priority == Ticket::NONE.to_s
+      "badge-light"
+    elsif priority == Ticket::LOW.to_s
+      "badge-success"
+    elsif priority == Ticket::MEDIUM.to_s
+      "badge-warning"
+    else
+      "badge-danger"
+    end
+  end
 end

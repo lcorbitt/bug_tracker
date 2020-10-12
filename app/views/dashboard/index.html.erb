@@ -1,68 +1,80 @@
-<h1 class="mt-4">Dashboard</h1>
+<div class="container-fluid bg-light">
+  <div class="row pt-4 pb-3">
+    <div class="col text-center">
+      <h1 class="display-4">Dashboard</h1>
+    </div>
+  </div>
+</div>
 
-<div class="row">
-  <div class="card-deck">
-    <div class="col-sm-12 col-md-12 col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <!--Tickets by Priority Graph-->
-            <canvas
-              id="ticketsByPriorityChart"
-              data-controller="graph"
-              data-totals=<%= @tickets_by_priority_totals.to_json %>
-            >
-            </canvas>
+<%# <h1 class="mt-4">Dashboard</h1> %>
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col text-center">
+      <div class="card-deck">
+        <div class="col-sm-12 col-md-12 col-lg-6 mb-sm-4 mb-xs-4">
+          <div class="card">
+            <div class="card-body">
+              <!--Tickets by Priority Graph-->
+                <canvas
+                  id="ticketsByPriorityChart"
+                  data-controller="graph"
+                  data-totals=<%= @tickets_by_priority_totals.to_json %>
+                >
+                </canvas>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Tickets by Priority</small>
+            </div>
+          </div>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">Tickets by Priority</small>
+
+        <div class="col-sm-12 col-md-12 col-lg-6 mb-sm-4 mb-xs-4">
+          <div class="card">
+            <div class="card-body">
+              <!--Tickets by Status Graph-->
+              <canvas
+                id="ticketsByStatusChart"
+                data-controller="graph"
+                data-totals=<%= @tickets_by_status_totals.to_json %>
+              >
+              </canvas>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Tickets by Status</small>
+            </div>
+          </div>
         </div>
+
+        <!-- TODO: Tickets by Type-->
+        <%# <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div> %>
+
+        <%# <div class="col-sm-12 col-md-12 col-lg-6"> %>
+          <%# <div class="card"> %>
+            <%# <div class="card-body"> %>
+              <!--Tickets by Assignee Graph-->
+              <%# <canvas %>
+                <%# id="ticketsByAssigneeChart" %>
+                <%# data-controller="graph" %>
+                <%# data-totals=<%= @tickets_by_assignee_totals.to_json %>
+              <%# > %>
+              <%# </canvas> %>
+            <%# </div> %>
+            <%# <div class="card-footer"> %>
+              <%# <small class="text-muted">Tickets by Assignee</small> %>
+            <%# </div> %>
+          <%# </div> %>
+        <%# </div> %>
       </div>
     </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <!--Tickets by Status Graph-->
-          <canvas
-            id="ticketsByStatusChart"
-            data-controller="graph"
-            data-totals=<%= @tickets_by_status_totals.to_json %>
-          >
-          </canvas>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Tickets by Status</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- TODO: Tickets by Type-->
-    <%# <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div> %>
-
-    <%# <div class="col-sm-12 col-md-12 col-lg-6"> %>
-      <%# <div class="card"> %>
-        <%# <div class="card-body"> %>
-          <!--Tickets by Assignee Graph-->
-          <%# <canvas %>
-            <%# id="ticketsByAssigneeChart" %>
-            <%# data-controller="graph" %>
-            <%# data-totals=<%= @tickets_by_assignee_totals.to_json %>
-          <%# > %>
-          <%# </canvas> %>
-        <%# </div> %>
-        <%# <div class="card-footer"> %>
-          <%# <small class="text-muted">Tickets by Assignee</small> %>
-        <%# </div> %>
-      <%# </div> %>
-    <%# </div> %>
   </div>
 </div>
