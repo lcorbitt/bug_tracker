@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = Comment.for(commented_on_id: @ticket.id)
+    @comments = Comment.for(commented_on_id: @ticket.id).reverse
   end
 
   def edit
