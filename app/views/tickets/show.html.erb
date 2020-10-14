@@ -89,7 +89,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
               <%= link_to 'Edit', edit_project_ticket_comment_path(@project, @ticket, comment), class: "dropdown-item" %>
-              <%= link_to 'Destroy', project_ticket_comment_path(@project, @ticket, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+              <%= link_to 'Destroy', project_ticket_comment_path(@project, @ticket, comment), method: :delete, data: { confirm: 'Are you sure you want to delete this Ticket? This cannot be undone.' }, class: "dropdown-item" %>
             </div>
           </div>
         </div>
