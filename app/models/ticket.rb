@@ -6,6 +6,11 @@ class Ticket < ApplicationRecord
   has_many :ticket_assignees, dependent: :destroy
   has_many :assignees, through: :ticket_assignees, source: :user
 
+  validates :title, presence: true
+  validates :status, presence: true
+  validates :description, presence: true
+  validates :priority, presence: true
+
   # Creates the ActiveRecord::Enum mappings between the attribute values and
   # their associated database integers. Also creates a constant for each value.
   #
