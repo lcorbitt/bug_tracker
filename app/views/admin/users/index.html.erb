@@ -3,7 +3,7 @@
     <div class="col text-center">
       <h1 class="display-4 d-inline">Users</h1>
       <% if @users.present? %>
-        <span class="badge badge-secondary"><%= current_user.projects.size %></span>
+        <span class="badge badge-secondary"><%= @users.size %></span>
       <% end %>
     </div>
   </div>
