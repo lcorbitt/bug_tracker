@@ -1,26 +1,55 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container-fluid text-center bg-primary" style="padding-top: 5em; height: 100%;" >
+  <div class="card col-sm-8 col-md-8 col-lg-6" style="margin: 0 auto; box-shadow: 25px 25px 25px 0 rgba(0,0,0,0.2);">
+    <div class="container mt-4">
+      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bug mr-1" style="color: black;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A4.979 4.979 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A4.985 4.985 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623zM4 7v4a4 4 0 0 0 3.5 3.97V7H4zm4.5 0v7.97A4 4 0 0 0 12 11V7H8.5zM12 6H4a3.99 3.99 0 0 1 1.333-2.982A3.983 3.983 0 0 1 8 2c1.025 0 1.959.385 2.666 1.018A3.989 3.989 0 0 1 12 6z"/>
+      </svg>
+      <h2 class="d-inline">Bug Tracker Log In</h2>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-horizontal") do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <br>
+
+      <div class="form-group">
+        <div class="field">
+          <div class="col-sm-10" style="margin: 0 auto;">
+            <%= f.text_field :login, class: "form-control", autofocus: true, placeholder: "Email or Username" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="field">
+          <div class="col-sm-10" style="margin: 0 auto;">
+            <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+          </div>
+        </div>
+      </div>
+
+        <div class="form-group">
+            <% if devise_mapping.rememberable? %>
+              <div class="field">
+                <div class="col-sm-10" style="margin: 0 auto;">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              </div>
+            <% end %>
+        </div>
+
+      <div class="form-group my-4">
+        <div class="col-sm-offset-2 col-sm-10 mt-3" style="margin: 0 auto;">
+          <%= f.submit "Log In", class: "btn btn-primary" %>
+        </div>
+      </div>
+
+      <%= render "devise/shared/links" %>
+
+      <div class="col-sm-10 my-4 text-muted" style="margin: 0 auto;">
+        <small><em>We do not share your personal information with other individuals or organizations.</em></small>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
