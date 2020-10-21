@@ -6,8 +6,6 @@ export default class extends Controller {
   connect() {
     this.graphTicketsByPriority()
     this.graphTicketsByStatus()
-    this.graphTicketsByAssignee()
-    this.chartDoughnutGraph()
   }
 
   graphTicketsByPriority() {
