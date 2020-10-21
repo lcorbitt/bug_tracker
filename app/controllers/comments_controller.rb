@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :set_project, only: [:edit, :update, :destroy, :create]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :set_ticket, only: [:edit, :update, :destroy]
+  before_action :set_ticket, only: [:edit, :update, :destroy, :create]
 
   def edit
   end
@@ -14,14 +14,10 @@ class CommentsController < ApplicationController
       commented_on_type: commented_on_type
     )
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_back fallback_location: projects_path }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.save
+      redirect_back fallback_location: project_ticket_path(@project, @ticket), notice: 'Comment was successfully created!'
+    else
+      render plain: @comment.errors.full_messages, status: :bad_request
     end
   end
 
@@ -40,7 +36,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to [@project, @ticket], notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to [@project, @ticket], notice: 'Comment was successfully deleted.' }
       format.json { head :no_content }
     end
   end
