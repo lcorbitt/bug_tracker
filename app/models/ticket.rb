@@ -5,6 +5,7 @@ class Ticket < ApplicationRecord
   has_many :comments, as: :commented_on, dependent: :destroy
   has_many :ticket_assignees, dependent: :destroy
   has_many :assignees, through: :ticket_assignees, source: :user
+  has_many :notifications, as: :notified_of, dependent: :destroy
 
   validates :title, presence: true
   validates :status, presence: true
