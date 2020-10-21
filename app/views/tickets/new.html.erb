@@ -1,5 +1,14 @@
-<h1>New Ticket</h1>
-<p>for: <%= @project.name %></p>
+<div class="container bg-light">
+  <div class="row pt-4">
+    <div class="col text-center justify-content-between">
+      <h1 class="display-4 d-inline"><%= link_to @project.name, project_path(@project), style: "text-decoration: none;" %> < New Ticket</h1>
+      <br><br>
+    </div>
+  </div>
+
+  <hr>
+
+</div>
 
 <%= render 'form', ticket: @ticket %>
 

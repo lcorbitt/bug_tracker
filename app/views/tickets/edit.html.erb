@@ -1,6 +1,28 @@
-<h1>Editing Ticket</h1>
+<div class="container bg-light">
+  <div class="row pt-4">
+    <div class="col text-center justify-content-between">
+      <h1 class="display-4 d-inline">Editing
+        <%= link_to project_ticket_path(@project, @ticket), style: "text-decoration: none;" do %>
+          <%= @ticket.title %>
+        <% end %>
+      </h1>
+      <br><br>
+      <p><%= @ticket.description %></p>
+    </div>
+  </div>
+
+  <hr>
+
+</div>
 
 <%= render 'form', ticket: @ticket %>
 
-<%= link_to 'Show', project_ticket_path(@ticket) %> |
-<%= link_to 'Back', project_ticket_path(@project, @ticket) %>
+<div class="container">
+  <div class="form-group my-2">
+    <div class="col-sm-offset-2 col-sm-10 mt-3">
+      <div class="actions">
+        <%= button_to 'Back', project_ticket_path(@project, @ticket), method: :get, class: "btn" %>
+      </div>
+    </div>
+  </div>
+</div>
