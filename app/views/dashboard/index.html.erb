@@ -14,6 +14,9 @@
       <div class="card-deck">
         <div class="col-sm-12 col-md-12 col-lg-6 mb-sm-4 mb-xs-4">
           <div class="card">
+            <div class="card-header">
+              <small class="text-muted">Tickets by Priority</small>
+            </div>
             <div class="card-body">
               <!--Tickets by Priority Graph-->
                 <canvas
@@ -23,14 +26,14 @@
                 >
                 </canvas>
             </div>
-            <div class="card-footer">
-              <small class="text-muted">Tickets by Priority</small>
-            </div>
           </div>
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-6 mb-sm-4 mb-xs-4">
           <div class="card">
+            <div class="card-header">
+              <small class="text-muted">Tickets by Status</small>
+            </div>
             <div class="card-body">
               <!--Tickets by Status Graph-->
               <canvas
@@ -39,9 +42,6 @@
                 data-totals=<%= @tickets_by_status_totals.to_json %>
               >
               </canvas>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Tickets by Status</small>
             </div>
           </div>
         </div>
