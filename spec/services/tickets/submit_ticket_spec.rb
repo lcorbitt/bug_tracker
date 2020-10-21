@@ -37,6 +37,7 @@ RSpec.describe Tickets::SubmitTicket do
         expect(submit_ticket.errors).to be_nil
       end
     end
+
     context 'with an assignee' do
       let(:jane) { create :user }
       let(:john) { create :user }
