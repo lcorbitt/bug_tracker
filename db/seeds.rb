@@ -25,7 +25,7 @@ lukas = User.create(
 ###########################  Create employees  ###########################
 ###################################################################################
 
-10.times do
+20.times do
   User.create(
     username: Faker::Internet.username,
     email: Faker::Internet.email,
@@ -38,7 +38,7 @@ end
 ###########################  Create Projects  ###########################
 ###################################################################################
 
-10.times do
+20.times do
   Project.create(
     user: lukas,
     name: Faker::Hipster.sentence,
@@ -50,7 +50,7 @@ end
 ###########################  Create Tickets  ###########################
 ###################################################################################
 
-50.times do
+100.times do
   Ticket.create(
     user: User.all.sample(),
     project: Project.all.sample(),
@@ -61,7 +61,23 @@ end
   )
 end
 
+###################################################################################
+###########################  Create Tickets  ###########################
+###################################################################################
+
+100.times do
+  Comment.create(
+    user: User.all.sample(),
+    message: Faker::Hipster.sentence,
+    commented_on: Ticket.all.sample()
+  )
+end
+
+###################################################################################
+###########################  Results  ###########################
+###################################################################################
+
 puts "#{User.all.size} User records created."
 puts "#{Project.all.size} Project records created."
 puts "#{Ticket.all.size} Ticket records created."
-
+puts "#{Comment.all.size} Comment records created."
