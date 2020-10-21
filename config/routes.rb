@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations"}
 
   devise_scope :user do
-    authenticated :user do
-      root 'projects#index', as: :authenticated_root
+  authenticated :user do
+      root 'dashboard#index', as: :authenticated_root
     end
 
     unauthenticated do
