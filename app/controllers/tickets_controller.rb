@@ -1,6 +1,12 @@
 class TicketsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:new, :create, :edit, :update, :show, :destroy]
   before_action :set_ticket, only: [:edit, :update, :destroy, :show]
+
+  def index
+    @tickets = Ticket.for_user_or_assignee(current_user)
+    @paginated_tickets = @tickets.paginate(page: page, per_page: 10)
+  end
 
   def new
     @ticket = Ticket.new
@@ -60,5 +66,9 @@ class TicketsController < ApplicationController
 
     def set_project
       @project = Project.find(params[:project_id])
+    end
+
+    def page
+      params[:page]
     end
 end

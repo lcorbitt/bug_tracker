@@ -4,6 +4,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.all.sort
+    @paginated_users = @users.paginate(page: page, per_page: 10)
   end
 
   def toggle_role
@@ -26,5 +27,9 @@ class Admin::UsersController < ApplicationController
     if current_user.employee?
       redirect_to dashboard_index_path, alert: "You are not authorized to view that page."
     end
+  end
+
+  def page
+    params[:page]
   end
 end

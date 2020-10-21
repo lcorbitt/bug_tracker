@@ -1,0 +1,57 @@
+<div class="container-fluid bg-light">
+  <div class="row pt-4 pb-4">
+    <div class="col text-center justify-content-between">
+      <h1 class="display-4 d-inline">Your Tickets</h1>
+      <% if @tickets.present? %>
+        <span class="badge badge-secondary"><%= @tickets.size %></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-3">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-all" data-toggle="tab" href="#all" role="tab" aria-controls="nav-all" aria-selected="true">All</a>
+      <a class="nav-item nav-link" id="nav-created" data-toggle="tab" href="#created" role="tab" aria-controls="nav-created" aria-selected="false">Created</a>
+      <a class="nav-item nav-link" id="nav-assigned" data-toggle="tab" href="#assigned" role="tab" aria-controls="nav-assigned" aria-selected="false">Assigned</a>
+    </div>
+  </nav>
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="nav-all-tab">
+      <% @paginated_tickets.each do |ticket| %>
+        <div class="card mt-3">
+          <div class="card-header d-inline">
+            <%= link_to project_ticket_path(ticket.project, ticket), style: "text-decoration: none;" do %>
+              <h5 class="d-inline"># <%= ticket.id %> <%= ticket.title %></h5>
+              <span class="ml-1 badge <%= priority_badge_color(ticket.priority) %>"><%= ticket.priority.capitalize %></span>
+            <% end %>
+            <div class="d-inline float-right">
+              <% if ticket.assignees.present? %>
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                </svg>
+                <span class="badge badge-light ml-1"><%= ticket.assignees.map(&:username).first %></span>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p><%= ticket.description %></p>
+              <footer class="text-muted d-inline">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+                  <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+                <p class="d-inline">Created <%= time_ago_in_words(ticket.created_at) %> ago by <%= ticket.user.username %></p>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= will_paginate @paginated_tickets %>

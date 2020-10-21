@@ -4,10 +4,12 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects.order(created_at: :desc)
+    @paginated_projects = @projects.paginate(page: page, per_page: 10)
   end
 
   def show
-    @tickets = Ticket.includes(:assignees).for(project_id: @project.id)
+    @tickets = Ticket.includes(:assignees).for_project(project_id: @project.id)
+    @paginated_tickets = @tickets.paginate(page: page, per_page: 10)
   end
 
   def new
@@ -22,7 +24,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to @project, notice: 'Project was successfully created!' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -46,7 +48,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'Project was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -59,5 +61,9 @@ private
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def page
+    params[:page]
   end
 end

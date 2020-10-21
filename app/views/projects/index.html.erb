@@ -1,16 +1,17 @@
 <div class="container-fluid bg-light">
   <div class="row pt-4 pb-4">
-    <div class="col text-center">
+    <div class="col text-center justify-content-between">
       <h1 class="display-4 d-inline">Your Projects</h1>
       <% if @projects.present? %>
-        <span class="badge badge-secondary"><%= current_user.projects.size %></span>
+        <span class="badge badge-secondary"><%= @projects.size %></span>
       <% end %>
+      <%= link_to 'New Project', new_project_path, class: "btn btn-primary text-white float-right mt-3" %>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <% @projects.each do |project| %>
+  <% @paginated_projects.each do |project| %>
     <div class="card mt-3">
       <div class="card-header">
         <%= link_to project, style: "text-decoration: none;" do %>
@@ -32,3 +33,5 @@
     </div>
   <% end %>
 </div>
+
+<%= will_paginate @paginated_projects %>
