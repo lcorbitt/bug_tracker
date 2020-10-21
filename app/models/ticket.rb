@@ -44,10 +44,26 @@ class Ticket < ApplicationRecord
 
   enum priority: ENUM_PRIORITY_MAPPINGS, _suffix: true
 
-  def self.for(project_id:)
-    self
+  def self.for_project(project_id:)
+    Ticket
       .includes(:user)
       .where(project_id: project_id)
+      .order(created_at: :desc)
+  end
+
+  def self.for_user_or_assignee(user)
+    Ticket
+      .includes(:project, :user, :assignees, :ticket_assignees)
+      .where(
+        user: user
+      )
+      .or(
+        Ticket
+        .includes(:project, :user, :assignees, :ticket_assignees)
+          .where(
+            ticket_assignees: { user: user }
+          )
+      )
       .order(created_at: :desc)
   end
 end
