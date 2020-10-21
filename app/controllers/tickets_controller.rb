@@ -23,8 +23,8 @@ class TicketsController < ApplicationController
   def create
     submit_ticket = Tickets::SubmitTicket.new(
       user: current_user,
-      project: @project,
-      params: ticket_params
+      params: ticket_params,
+      project: @project
     )
 
     if submit_ticket.save
@@ -35,21 +35,24 @@ class TicketsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html { redirect_to [@project, @ticket], notice: 'Ticket was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ticket }
-      else
-        format.html { render :edit }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
+    submit_ticket = Tickets::SubmitTicket.new(
+      user: current_user,
+      params: ticket_params,
+      project: @project,
+      ticket: @ticket
+    )
+
+    if submit_ticket.update
+      redirect_to [@project, @ticket], notice: 'Ticket updated successfully!'
+    else
+      render plain: submit_ticket.errors, status: :bad_request
     end
   end
 
   def destroy
     @ticket.destroy
     respond_to do |format|
-      format.html { redirect_to @project, notice: 'Ticket was successfully destroyed.' }
+      format.html { redirect_to @project, notice: 'Ticket was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -57,7 +60,7 @@ class TicketsController < ApplicationController
   private
 
     def ticket_params
-      params.require(:ticket).permit(:user_id, :title, :status, :description, :priority, :assignees)
+      params.require(:ticket).permit(:id, :user_id, :title, :status, :description, :priority, :assignees, :project_id)
     end
 
     def set_ticket
